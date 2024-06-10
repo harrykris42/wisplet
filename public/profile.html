@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Wisplet</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" style="color: inherit; text-decoration: none;">
+        <h1>Wisplet</h1>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#" id="username"></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="profile">
+    <div class="container">
+      <h2>Profile</h2>
+      <form action="/update-profile" method="POST" id="profileForm">
+        <label for="username">User Name:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="btn">Update Profile</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Wisplet. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Populate the form with current user data
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/get-user')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('username').value = data.username;
+          document.getElementById('email').value = data.email;
+          document.getElementById('phone').value = data.phone;
+        });
+
+      // Set the username in the nav bar
+      fetch('/get-user')
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('username').textContent = data.username;
+        });
+    });
+  </script>
+</body>
+</html>
+

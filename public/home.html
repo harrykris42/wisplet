@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wisplet Hosting Services</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="/" style="color: inherit; text-decoration: none;">
+        <h1>Wisplet</h1>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li id="userMenu" style="display: none;">
+            <button id="userButton">
+              <img src="/user-icon.png" alt="User Icon" style="width: 30px; height: 30px; border-radius: 50%;">
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Reliable Hosting Services</h2>
+      <p>Get started with our basic hosting plan including 32GB storage, 1GB RAM, and 1 core CPU. Perfect for small projects and websites.</p>
+      <a href="/signup" class="btn" id="ctaButton">Get Started</a>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="container">
+      <h2>Features</h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <h3>Reliable Storage</h3>
+          <p>32GB of fast, reliable storage to keep your data safe and accessible.</p>
+        </div>
+        <div class="feature">
+          <h3>High Performance</h3>
+          <p>1GB of RAM and 1 core CPU for smooth and responsive performance.</p>
+        </div>
+        <div class="feature">
+          <h3>24/7 Support</h3>
+          <p>Our support team is available 24/7 to assist you with any issues.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2>Pricing</h2>
+      <div class="pricing-table">
+        <div class="plan">
+          <h3>Basic Plan</h3>
+          <p class="price">$5/month</p>
+          <ul>
+            <li>32GB Storage</li>
+            <li>1GB RAM</li>
+            <li>1 Core CPU</li>
+          </ul>
+          <a href="/signup" class="btn">Sign Up</a>
+        </div>
+        <div class="plan">
+          <h3>Standard Plan</h3>
+          <p class="price">$10/month</p>
+          <ul>
+            <li>64GB Storage</li>
+            <li>2GB RAM</li>
+            <li>2 Core CPU</li>
+          </ul>
+          <a href="/signup" class="btn">Sign Up</a>
+        </div>
+        <div class="plan">
+          <h3>Premium Plan</h3>
+          <p class="price">$20/month</p>
+          <ul>
+            <li>128GB Storage</li>
+            <li>4GB RAM</li>
+            <li>4 Core CPU</li>
+          </ul>
+          <a href="/signup" class="btn">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Wisplet. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('/get-user')
+      .then(response => response.json())
+      .then(data => {
+        const userMenu = document.getElementById('userMenu');
+        const userButton = document.getElementById('userButton');
+
+        if (data.loggedIn) {
+          userMenu.style.display = 'block';
+          userButton.innerHTML = `<img src="/user-icon.png" alt="User Icon" style="width: 30px; height: 30px; border-radius: 50%;">`;
+          userButton.addEventListener('click', () => {
+            window.location.href = '/profile';
+          });
+          document.getElementById('ctaButton').style.display = 'none';
+        } else {
+          userMenu.style.display = 'block';
+          userButton.innerHTML = 'Login';
+          userButton.addEventListener('click', () => {
+            window.location.href = '/login';
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
