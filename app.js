@@ -73,6 +73,12 @@ app.get('/profile', (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
   }
+
+  // If the user is already logged in, redirect to the home page
+  if (req.session.user) {
+    return res.redirect('/');
+  }
+
   res.sendFile(path.join(publicDirectoryPath, 'profile.html'));
 });
 

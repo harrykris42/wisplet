@@ -23,7 +23,7 @@ body {
 header {
     background-color: #007bff;
     color: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -31,20 +31,27 @@ header {
     animation: slideInDown 1s ease-in-out;
 }
 
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 header h1 {
     font-size: 32px;
-    text-align: center;
+    margin: 0;
+    line-height: 1;
 }
 
 header nav ul {
-    list-style-type: none;
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 header nav ul li {
-    margin: 0 15px;
+    margin-left: 20px;
 }
 
 header nav ul li a {
@@ -56,6 +63,19 @@ header nav ul li a {
 
 header nav ul li a:hover {
     color: #ffd700;
+}
+
+header nav ul li button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+header nav ul li button:hover {
+  color: #ffd700;
 }
 
 .hero {

@@ -8,24 +8,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <a href="/" style="color: inherit; text-decoration: none;">
-        <h1>Wisplet</h1>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li id="userMenu" style="display: none;">
-            <button id="userButton">
-              <img src="/user-icon.png" alt="User Icon" style="width: 30px; height: 30px; border-radius: 50%;">
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<header>
+  <div class="container">
+    <a href="/" style="color: inherit; text-decoration: none;">
+      <h1>Wisplet</h1>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li id="userMenuContainer" style="display: none;">
+          <button id="userButton"></button>
+        </li>
+        <li id="loginSignupContainer" style="display: none;">
+          <button id="loginSignupButton">Login/Signup</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
   <section class="hero">
     <div class="container">
@@ -99,31 +100,37 @@
     </div>
   </footer>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      fetch('/get-user')
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch('/get-user')
       .then(response => response.json())
       .then(data => {
-        const userMenu = document.getElementById('userMenu');
+        const userMenuContainer = document.getElementById('userMenuContainer');
         const userButton = document.getElementById('userButton');
+        const loginSignupContainer = document.getElementById('loginSignupContainer');
 
         if (data.loggedIn) {
-          userMenu.style.display = 'block';
-          userButton.innerHTML = `<img src="/user-icon.png" alt="User Icon" style="width: 30px; height: 30px; border-radius: 50%;">`;
+          userMenuContainer.style.display = 'block';
+          userButton.textContent = 'Profile';
           userButton.addEventListener('click', () => {
             window.location.href = '/profile';
           });
           document.getElementById('ctaButton').style.display = 'none';
+          loginSignupContainer.style.display = 'none';
         } else {
-          userMenu.style.display = 'block';
-          userButton.innerHTML = 'Login';
-          userButton.addEventListener('click', () => {
+          userMenuContainer.style.display = 'none';
+          loginSignupContainer.style.display = 'block';
+          document.getElementById('loginSignupButton').addEventListener('click', () => {
             window.location.href = '/login';
           });
         }
+      })
+      .catch(error => {
+        console.error('Error fetching user data:', error);
+        // Handle the error, e.g., show an error message
       });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
-
